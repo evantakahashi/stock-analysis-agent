@@ -1,5 +1,6 @@
 from fastapi import FastAPI, HTTPException
 from typing import Dict, Any
+from data.prices import get_price
 
 app = FastAPI(
     title="Stock Market Analysis API",
@@ -16,11 +17,17 @@ async def analyze_stock(ticker: str) -> Dict[str, Any]:
     """
     Analyze a stock ticker and return analysis results
     """
-    # Dummy data for demonstration
+    # Get real price data
+    current_price = get_price(ticker)
+    
+    if current_price is None:
+        raise HTTPException(status_code=404, detail=f"Could not fetch data for ticker {ticker}")
+    
+    # Dummy data for demonstration (keeping other fields as dummy data for now)
     analysis_result = {
         "ticker": ticker,
-        "current_price": 150.25,
-        "price_change": 2.5,
+        "current_price": current_price,
+        "price_change": 2.5,  # This could be calculated from historical data
         "volume": 1000000,
         "market_cap": "1.5B",
         "analysis": {
