@@ -3,3 +3,7 @@ uvicorn
 pydantic
 alpha_vantage
 python-dotenv
+pandas_ta
+transformers
+torch
+tf-keras
