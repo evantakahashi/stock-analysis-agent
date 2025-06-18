@@ -7,3 +7,5 @@ pandas_ta
 transformers
 torch
 tf-keras
+finnhub-python
+newsapi-python

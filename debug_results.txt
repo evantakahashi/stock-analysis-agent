@@ -1,0 +1,1 @@
+LSTM Model Debug Results\n==============================\nCurrent Price: $195.64\nPredicted Price: $23.89\nPrice Difference: $-171.75\nPercentage Change: -87.79%\nModel Parameters: 58,562\n

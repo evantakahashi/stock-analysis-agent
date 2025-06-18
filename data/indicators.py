@@ -57,6 +57,9 @@ def get_technical_indicators(ticker: str) -> Dict[str, Optional[float]]:
             '5. volume': 'volume'
         }, inplace=True)
 
+        # Sort data by date in ascending order (oldest to newest)
+        data = data.sort_index(ascending=True)
+
         # Calculate RSI (14 periods is standard)
         logger.info("Calculating RSI...")
         rsi = ta.rsi(data['close'], length=14)
@@ -65,7 +68,7 @@ def get_technical_indicators(ticker: str) -> Dict[str, Optional[float]]:
         logger.info("Calculating 20-day MA...")
         ma_20 = ta.sma(data['close'], length=20)
         
-        # Get the most recent non-NaN values
+        # Get the most recent non-NaN values (last row is the latest trading day)
         latest_rsi = rsi.dropna().iloc[-1] if not rsi.dropna().empty else None
         latest_ma = ma_20.dropna().iloc[-1] if not ma_20.dropna().empty else None
         
